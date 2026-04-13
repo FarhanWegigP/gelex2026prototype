@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import Shelly, { ShellyMood } from "@/components/Shelly";
+import Glexy, { GlexyMood } from "@/components/Glexy";
 
 // Hardcoded 7x7 crossword grid
 // 0 = black, 1 = white cell
@@ -80,7 +80,7 @@ export default function TTSRohaniPage() {
   const [selected, setSelected] = useState<{ row: number; col: number } | null>(null);
   const [revealed, setRevealed] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [shellyMood, setShellyMood] = useState<ShellyMood>("thinking");
+  const [shellyMood, setGlexyMood] = useState<GlexyMood>("thinking");
   const [shellyMsg, setShellyMsg] = useState("Klik kotak putih lalu ketik jawaban TTS-nya! 📖");
 
   const handleCellClick = (row: number, col: number) => {
@@ -108,15 +108,15 @@ export default function TTSRohaniPage() {
     }
     setChecked(true);
     const pct = Math.round((correct / total) * 100);
-    if (pct === 100) { setShellyMood("cheering"); setShellyMsg("SEMPURNA! Kamu ahli TTS rohani! 🏆✨"); }
-    else if (pct >= 60) { setShellyMood("happy"); setShellyMsg(`${pct}% benar! Hampir sempurna! 💪`); }
-    else { setShellyMood("thinking"); setShellyMsg(`${pct}% benar. Baca petunjuknya lagi yuk! 📖`); }
+    if (pct === 100) { setGlexyMood("cheering"); setShellyMsg("SEMPURNA! Kamu ahli TTS rohani! 🏆✨"); }
+    else if (pct >= 60) { setGlexyMood("happy"); setShellyMsg(`${pct}% benar! Hampir sempurna! 💪`); }
+    else { setGlexyMood("thinking"); setShellyMsg(`${pct}% benar. Baca petunjuknya lagi yuk! 📖`); }
   };
 
   const revealAll = () => {
     setRevealed(true);
     setUserInput(SOLUTION_GRID.map((row) => row.map((cell) => cell.letter)));
-    setShellyMood("waving");
+    setGlexyMood("waving");
     setShellyMsg("Ini jawabannya! Belajar dulu ya untuk besok! 😊");
   };
 
@@ -124,22 +124,22 @@ export default function TTSRohaniPage() {
     setUserInput(Array.from({ length: GRID_SIZE }, () => Array(GRID_SIZE).fill("")));
     setRevealed(false);
     setChecked(false);
-    setShellyMood("thinking");
+    setGlexyMood("thinking");
     setShellyMsg("Coba lagi! Kamu pasti bisa! 🌟");
   };
 
   const getCellColor = (row: number, col: number) => {
-    if (!checked || !userInput[row][col]) return "bg-white";
-    return userInput[row][col] === SOLUTION_GRID[row][col].letter ? "bg-green-100" : "bg-red-100";
+    if (!checked || !userInput[row][col]) return "bg-[#0D1B4B]";
+    return userInput[row][col] === SOLUTION_GRID[row][col].letter ? "bg-[#34D399]/20" : "bg-red-500/20";
   };
 
   return (
-    <div className="min-h-screen bg-offwhite pb-24">
-      <div className="bg-gelex-gradient py-12 px-6">
+    <div className="min-h-screen bg-[#060B18] pb-24">
+      <div className="bg-gradient-to-br from-[#060B18] via-[#0D1B4B] to-[#120A3B] py-12 px-6 border-b border-[#38BDF8]/10">
         <div className="max-w-3xl mx-auto">
-          <Link href="/games" className="text-shelly/50 hover:text-shelly text-sm font-body mb-2 inline-block">← Kembali ke Games</Link>
-          <h1 className="font-heading font-black text-3xl text-shelly-dark">✝️🕌🛕 TTS Rohani</h1>
-          <p className="font-body text-shelly/60 mt-1">Teka-teki silang bertema kerohanian UGM</p>
+          <Link href="/games" className="text-[#94A3B8] hover:text-[#38BDF8] text-sm font-body mb-2 inline-block transition-colors">← Kembali ke Games</Link>
+          <h1 className="font-heading font-black text-3xl text-[#E2E8F0]">✝️🕌🛕 TTS Rohani</h1>
+          <p className="font-body text-[#94A3B8] mt-1">Teka-teki silang bertema kerohanian UGM</p>
         </div>
       </div>
 
@@ -147,17 +147,17 @@ export default function TTSRohaniPage() {
         <div className="grid md:grid-cols-2 gap-6">
           {/* Grid TTS */}
           <div>
-            <div className="inline-block border-2 border-shelly-dark/20 rounded-xl overflow-hidden shadow-card">
+            <div className="inline-block border-2 border-[#38BDF8]/20 rounded-xl overflow-hidden shadow-card">
               {SOLUTION_GRID.map((row, r) => (
                 <div key={r} className="flex">
                   {row.map((cell, c) => (
-                    <div key={c} className="relative w-10 h-10 border border-shelly-dark/10">
+                    <div key={c} className="relative w-10 h-10 border border-[#38BDF8]/10">
                       {cell.isBlack ? (
-                        <div className="w-full h-full bg-shelly-dark/80" />
+                        <div className="w-full h-full bg-[#060B18]" />
                       ) : (
-                        <div className={`w-full h-full ${getCellColor(r, c)} ${selected?.row === r && selected?.col === c ? "ring-2 ring-coral" : ""}`} onClick={() => handleCellClick(r, c)}>
+                        <div className={`w-full h-full ${getCellColor(r, c)} ${selected?.row === r && selected?.col === c ? "ring-2 ring-[#38BDF8]" : ""}`} onClick={() => handleCellClick(r, c)}>
                           {cell.number && (
-                            <span className="absolute top-0 left-0.5 text-[8px] font-bold text-shelly/60 leading-none">{cell.number}</span>
+                            <span className="absolute top-0 left-0.5 text-[8px] font-bold text-[#38BDF8]/60 leading-none">{cell.number}</span>
                           )}
                           <input
                             type="text"
@@ -165,7 +165,7 @@ export default function TTSRohaniPage() {
                             value={userInput[r][c]}
                             onChange={(e) => handleInput(e, r, c)}
                             onClick={() => handleCellClick(r, c)}
-                            className={`w-full h-full text-center font-heading font-black text-sm bg-transparent outline-none uppercase pt-2 cursor-pointer ${checked && userInput[r][c] ? (userInput[r][c] === cell.letter ? "text-green-700" : "text-red-600") : "text-shelly-dark"}`}
+                            className={`w-full h-full text-center font-heading font-black text-sm bg-transparent outline-none uppercase pt-2 cursor-pointer ${checked && userInput[r][c] ? (userInput[r][c] === cell.letter ? "text-green-400" : "text-red-400") : "text-[#E2E8F0]"}`}
                             readOnly={revealed}
                           />
                         </div>
@@ -180,35 +180,35 @@ export default function TTSRohaniPage() {
             <div className="flex gap-2 mt-4 flex-wrap">
               <button onClick={checkAnswers} className="btn-primary flex-1 text-sm py-2">✓ Cek Jawaban</button>
               <button onClick={revealAll} className="btn-secondary flex-1 text-sm py-2">👁 Tampilkan</button>
-              <button onClick={reset} className="flex-1 py-2 rounded-full text-sm font-body border border-peach text-shelly/60 hover:border-coral bg-white">↺ Reset</button>
+              <button onClick={reset} className="flex-1 py-2 rounded-full text-sm font-body border border-[#38BDF8]/20 text-[#94A3B8] hover:border-[#38BDF8]/50 bg-white/5">↺ Reset</button>
             </div>
           </div>
 
           {/* Clues */}
           <div className="space-y-4">
             <div>
-              <h3 className="font-heading font-bold text-lg text-shelly-dark mb-2">→ Mendatar</h3>
+              <h3 className="font-heading font-bold text-lg text-[#E2E8F0] mb-2">→ Mendatar</h3>
               <div className="space-y-2">
                 {WORDS.filter((w) => w.dir === "across").map((w) => (
-                  <div key={w.num} className="text-sm font-body text-shelly/70 flex gap-2">
-                    <span className="font-bold text-coral min-w-[20px]">{w.num}.</span>
+                  <div key={w.num} className="text-sm font-body text-[#94A3B8] flex gap-2">
+                    <span className="font-bold text-[#38BDF8] min-w-[20px]">{w.num}.</span>
                     <span>{w.clue}</span>
                   </div>
                 ))}
               </div>
             </div>
             <div>
-              <h3 className="font-heading font-bold text-lg text-shelly-dark mb-2">↓ Menurun</h3>
+              <h3 className="font-heading font-bold text-lg text-[#E2E8F0] mb-2">↓ Menurun</h3>
               <div className="space-y-2">
                 {WORDS.filter((w) => w.dir === "down").map((w) => (
-                  <div key={w.num} className="text-sm font-body text-shelly/70 flex gap-2">
-                    <span className="font-bold text-coral min-w-[20px]">{w.num}.</span>
+                  <div key={w.num} className="text-sm font-body text-[#94A3B8] flex gap-2">
+                    <span className="font-bold text-[#38BDF8] min-w-[20px]">{w.num}.</span>
                     <span>{w.clue}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <Shelly mood={shellyMood} message={shellyMsg} position="inline" size="sm" />
+            <Glexy mood={shellyMood} message={shellyMsg} position="inline" size="sm" />
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import Shelly, { ShellyMood } from "@/components/Shelly";
+import Glexy, { GlexyMood } from "@/components/Glexy";
 import { useAccessibility } from "@/hooks/useAccessibility";
 
 // ── PENALTY KICK ────────────────────────────────────────────
@@ -12,8 +12,8 @@ function PenaltyGame() {
   const [attempts, setAttempts] = useState(0);
   const [result, setResult] = useState<"goal" | "saved" | null>(null);
   const [keeperPos, setKeeperPos] = useState<KickZone | null>(null);
-  const [shellyMood, setShellyMood] = useState<ShellyMood>("excited");
-  const [shellyMsg, setShellyMsg] = useState("Tendang bolanya! Pilih sudut yang tepat!");
+  const [shellyMood, setGlexyMood] = useState<GlexyMood>("excited");
+  const [shellyMsg, setGlexyMsg] = useState("Tendang bolanya! Pilih sudut yang tepat!");
   const { speak } = useAccessibility();
 
   const zones: { id: KickZone; label: string; ariaLabel: string }[] = [
@@ -35,23 +35,23 @@ function PenaltyGame() {
     setAttempts((a) => a + 1);
     if (isGoal) {
       setScore((s) => s + 1);
-      setShellyMood("cheering");
-      setShellyMsg("Gol! Kamu tendang dengan sempurna!");
+      setGlexyMood("cheering");
+      setGlexyMsg("Gol! Kamu tendang dengan sempurna!");
       speak("Gol! Tendangan sempurna!");
     } else {
-      setShellyMood("sad");
-      setShellyMsg("Kiper menangkap bolanya! Coba lagi!");
+      setGlexyMood("sad");
+      setGlexyMsg("Kiper menangkap bolanya! Coba lagi!");
       speak("Kiper menangkap bolanya! Coba lagi.");
     }
-    setTimeout(() => { setResult(null); setKeeperPos(null); setShellyMood("excited"); setShellyMsg("Tendang lagi! Bisa kok!"); }, 2000);
+    setTimeout(() => { setResult(null); setKeeperPos(null); setGlexyMood("excited"); setGlexyMsg("Tendang lagi! Bisa kok!"); }, 2000);
   };
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <div className="font-heading font-black text-2xl text-shelly-dark">Penalti</div>
-        <div className="text-sm font-body text-shelly/60" aria-live="polite">
-          Gol: <span className="font-bold text-coral">{score}</span> / {attempts} tendangan
+        <div className="font-heading font-black text-2xl text-[#E2E8F0]">Penalti</div>
+        <div className="text-sm font-body text-[#94A3B8]" aria-live="polite">
+          Gol: <span className="font-bold text-[#38BDF8]">{score}</span> / {attempts} tendangan
         </div>
       </div>
 
@@ -81,7 +81,7 @@ function PenaltyGame() {
 
       {/* Kick zones */}
       <div>
-        <p className="text-sm font-body text-shelly/60 mb-3 text-center" id="kick-instructions">
+        <p className="text-sm font-body text-[#94A3B8] mb-3 text-center" id="kick-instructions">
           Pilih arah tendangan:
         </p>
         <div className="grid grid-cols-3 gap-2" role="group" aria-labelledby="kick-instructions">
@@ -91,7 +91,7 @@ function PenaltyGame() {
               onClick={() => kick(zone.id)}
               disabled={result !== null}
               aria-label={`Tendang ke ${zone.ariaLabel}`}
-              className="bg-white border-2 border-peach rounded-xl py-4 text-2xl font-heading font-black text-shelly hover:border-coral hover:bg-peach/20 transition-all active:scale-95 disabled:opacity-40"
+              className="bg-[#0D1B4B] border-2 border-[#38BDF8]/20 rounded-xl py-4 text-2xl font-heading font-black text-[#38BDF8] hover:border-[#38BDF8]/50 hover:bg-[#38BDF8]/10 transition-all active:scale-95 disabled:opacity-40"
             >
               <span aria-hidden="true">{zone.label}</span>
             </button>
@@ -99,7 +99,7 @@ function PenaltyGame() {
         </div>
       </div>
 
-      <Shelly mood={shellyMood} message={shellyMsg} position="inline" size="sm" />
+      <Glexy mood={shellyMood} message={shellyMsg} position="inline" size="sm" />
     </div>
   );
 }
@@ -111,8 +111,8 @@ function BasketGame() {
   const [power, setPower] = useState(50);
   const [running, setRunning] = useState(false);
   const [result, setResult] = useState<"masuk" | "meleset" | null>(null);
-  const [shellyMood, setShellyMood] = useState<ShellyMood>("excited");
-  const [shellyMsg, setShellyMsg] = useState("Stop power bar di tengah untuk peluang terbaik!");
+  const [shellyMood, setGlexyMood] = useState<GlexyMood>("excited");
+  const [shellyMsg, setGlexyMsg] = useState("Stop power bar di tengah untuk peluang terbaik!");
   const { speak } = useAccessibility();
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const dirRef = useRef(1);
@@ -143,24 +143,24 @@ function BasketGame() {
       setResult(isIn ? "masuk" : "meleset");
       if (isIn) {
         setScore((s) => s + 1);
-        setShellyMood("cheering");
-        setShellyMsg("Masuk! Tembakan sempurna!");
+        setGlexyMood("cheering");
+        setGlexyMsg("Masuk! Tembakan sempurna!");
         speak("Masuk! Tembakan sempurna!");
       } else {
-        setShellyMood("sad");
-        setShellyMsg("Meleset! Stop lebih dekat ke tengah ya!");
+        setGlexyMood("sad");
+        setGlexyMsg("Meleset! Stop lebih dekat ke tengah ya!");
         speak("Meleset. Stop lebih dekat ke tengah.");
       }
-      setTimeout(() => { setResult(null); setShellyMood("excited"); setShellyMsg("Coba lagi! Kamu bisa!"); setPower(50); }, 2000);
+      setTimeout(() => { setResult(null); setGlexyMood("excited"); setGlexyMsg("Coba lagi! Kamu bisa!"); setPower(50); }, 2000);
     }
   };
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <div className="font-heading font-black text-2xl text-shelly-dark">Lempar Basket</div>
-        <div className="text-sm font-body text-shelly/60" aria-live="polite">
-          Masuk: <span className="font-bold text-coral">{score}</span> / {attempts} lemparan
+        <div className="font-heading font-black text-2xl text-[#E2E8F0]">Lempar Basket</div>
+        <div className="text-sm font-body text-[#94A3B8]" aria-live="polite">
+          Masuk: <span className="font-bold text-[#38BDF8]">{score}</span> / {attempts} lemparan
         </div>
       </div>
 
@@ -177,11 +177,11 @@ function BasketGame() {
 
       {/* Power bar */}
       <div>
-        <p className="text-sm font-body text-shelly/60 mb-2 text-center" id="power-instructions">
+        <p className="text-sm font-body text-[#94A3B8] mb-2 text-center" id="power-instructions">
           Power Bar — Stop di zona hijau!
         </p>
         <div
-          className="relative h-8 bg-gray-100 rounded-full overflow-hidden border border-peach"
+          className="relative h-8 bg-[#38BDF8]/10 rounded-full overflow-hidden border border-[#38BDF8]/15"
           role="meter"
           aria-label={`Power bar: ${power}%. Zona tepat antara 32% dan 68%.`}
           aria-valuenow={power}
@@ -194,7 +194,7 @@ function BasketGame() {
             style={{ left: `calc(${power}% - 10px)` }}
             aria-hidden="true"
           />
-          <div className="absolute inset-0 flex items-center justify-center text-xs font-body text-shelly/50 pointer-events-none" aria-hidden="true">
+          <div className="absolute inset-0 flex items-center justify-center text-xs font-body text-[#94A3B8] pointer-events-none" aria-hidden="true">
             {power < 32 ? "Terlalu lemah" : power > 68 ? "Terlalu kuat" : "Zona tepat!"}
           </div>
         </div>
@@ -209,7 +209,7 @@ function BasketGame() {
         {running ? "STOP!" : result ? "Menghitung..." : "LEMPAR!"}
       </button>
 
-      <Shelly mood={shellyMood} message={shellyMsg} position="inline" size="sm" />
+      <Glexy mood={shellyMood} message={shellyMsg} position="inline" size="sm" />
     </div>
   );
 }
@@ -228,19 +228,19 @@ export default function OlahragaPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-offwhite pb-24">
+    <div className="min-h-screen bg-[#060B18] pb-24">
       <div
-        className="bg-gelex-gradient py-12 px-6"
+        className="bg-gradient-to-br from-[#060B18] via-[#0D1B4B] to-[#120A3B] py-12 px-6 border-b border-[#38BDF8]/10"
         data-section="header"
         data-narration={PAGE_GREETING}
         tabIndex={-1}
       >
         <div className="max-w-2xl mx-auto">
-          <Link href="/games" className="text-shelly/50 hover:text-shelly text-sm font-body mb-2 inline-block" aria-label="Kembali ke halaman Games">
+          <Link href="/games" className="text-[#94A3B8] hover:text-[#38BDF8] text-sm font-body mb-2 inline-block" aria-label="Kembali ke halaman Games">
             ← Kembali ke Games
           </Link>
-          <h1 className="font-heading font-black text-3xl text-shelly-dark">Game Olahraga</h1>
-          <p className="font-body text-shelly/60 mt-1">Tunjukkan kemampuan atletismu!</p>
+          <h1 className="font-heading font-black text-3xl text-[#E2E8F0]">Game Olahraga</h1>
+          <p className="font-body text-[#94A3B8] mt-1">Tunjukkan kemampuan atletismu!</p>
         </div>
       </div>
 
@@ -251,7 +251,7 @@ export default function OlahragaPage() {
             role="tab"
             aria-selected={activeGame === "penalti"}
             onClick={() => setActiveGame("penalti")}
-            className={`flex-1 py-3 rounded-2xl font-heading font-bold transition-all duration-150 ${activeGame === "penalti" ? "bg-shelly text-white" : "bg-white border border-peach text-shelly/70"}`}
+            className={`flex-1 py-3 rounded-2xl font-heading font-bold transition-all duration-150 ${activeGame === "penalti" ? "bg-[#38BDF8] text-[#060B18]" : "bg-white/5 border border-[#38BDF8]/15 text-[#94A3B8]"}`}
           >
             Penalti
           </button>
@@ -259,7 +259,7 @@ export default function OlahragaPage() {
             role="tab"
             aria-selected={activeGame === "basket"}
             onClick={() => setActiveGame("basket")}
-            className={`flex-1 py-3 rounded-2xl font-heading font-bold transition-all duration-150 ${activeGame === "basket" ? "bg-shelly text-white" : "bg-white border border-peach text-shelly/70"}`}
+            className={`flex-1 py-3 rounded-2xl font-heading font-bold transition-all duration-150 ${activeGame === "basket" ? "bg-[#38BDF8] text-[#060B18]" : "bg-white/5 border border-[#38BDF8]/15 text-[#94A3B8]"}`}
           >
             Basket
           </button>

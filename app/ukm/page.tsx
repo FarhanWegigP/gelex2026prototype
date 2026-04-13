@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search } from "lucide-react";
-import Shelly from "@/components/Shelly";
+import Glexy from "@/components/Glexy";
 import SectionNarrator from "@/components/SectionNarrator";
 import { useAccessibility } from "@/hooks/useAccessibility";
 import { ukmList, UKMCategory } from "@/data";
@@ -10,11 +10,11 @@ import { ukmList, UKMCategory } from "@/data";
 const categories: ("Semua" | UKMCategory)[] = ["Semua", "Seni", "Olahraga", "Rohani", "Khusus"];
 
 const categoryMessages: Record<string, string> = {
-  Semua: "Ada banyak UKM keren di UGM! Yuk explore semuanya!",
-  Seni: "UKM Seni — tempatnya para seniman berbakat UGM!",
-  Olahraga: "UKM Olahraga — sehat, kuat, dan berprestasi!",
-  Rohani: "UKM Rohani — tumbuh dalam iman dan kebersamaan!",
-  Khusus: "UKM Khusus — inovasi dan kontribusi nyata untuk bangsa!",
+  Semua: "Ada banyak UKM keren di UGM! Yuk explore semuanya! ⭐",
+  Seni: "UKM Seni — tempatnya para seniman berbakat UGM! 🎨",
+  Olahraga: "UKM Olahraga — sehat, kuat, dan berprestasi! 💪",
+  Rohani: "UKM Rohani — tumbuh dalam iman dan kebersamaan! 🙏",
+  Khusus: "UKM Khusus — inovasi dan kontribusi nyata untuk bangsa! 🚀",
 };
 
 const PAGE_GREETING =
@@ -39,10 +39,10 @@ export default function UKMPage() {
   const narrationText = `Halaman Unit Kegiatan Mahasiswa. Terdiri dari 4 Sekber dan total 55 UKM. ${filtered.map((u) => u.name).join(", ")}.`;
 
   return (
-    <div className="min-h-screen bg-offwhite pb-24">
+    <div className="min-h-screen bg-[#060B18] pb-24">
       {/* Header */}
       <div
-        className="bg-gelex-gradient py-16 px-6 relative overflow-hidden"
+        className="bg-gradient-to-br from-[#060B18] via-[#0D1B4B] to-[#120A3B] py-16 px-6 relative overflow-hidden border-b border-[#38BDF8]/10"
         data-section="header"
         data-narration={PAGE_GREETING}
         tabIndex={-1}
@@ -51,8 +51,8 @@ export default function UKMPage() {
           <div className="flex items-start justify-between flex-wrap gap-4">
             <div>
               <h1 className="section-title">Unit Kegiatan Mahasiswa</h1>
-              <p className="section-subtitle">Terdiri dari <strong>4 Sekber</strong> dan total <strong>55 UKM</strong></p>
-              <p className="font-body text-shelly/60 max-w-xl mt-3 leading-relaxed">
+              <p className="section-subtitle">Terdiri dari <strong className="text-[#38BDF8]">4 Sekber</strong> dan total <strong className="text-[#38BDF8]">55 UKM</strong></p>
+              <p className="font-body text-[#94A3B8] max-w-xl mt-3 leading-relaxed">
                 UKM adalah organisasi kemahasiswaan di UGM yang berperan sebagai wadah berdinamika bagi mahasiswa dalam pendidikan soft skills melalui kegiatan minat dan bakat.
               </p>
             </div>
@@ -64,14 +64,14 @@ export default function UKMPage() {
       <div className="max-w-6xl mx-auto px-6 mt-8">
         {/* Search */}
         <div className="relative mb-5">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-shelly/40" aria-hidden="true" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8]" aria-hidden="true" />
           <input
             type="search"
             placeholder="Cari Unit Kegiatan Mahasiswa..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             aria-label="Cari UKM berdasarkan nama"
-            className="w-full pl-11 pr-4 py-3 rounded-2xl border border-peach bg-white font-body text-shelly-dark focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/20 shadow-sm"
+            className="w-full pl-11 pr-4 py-3 rounded-2xl border border-[#38BDF8]/15 bg-[#0D1B4B]/50 font-body text-[#E2E8F0] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#38BDF8]/50 focus:ring-2 focus:ring-[#38BDF8]/10 shadow-sm backdrop-blur-sm"
           />
         </div>
 
@@ -85,8 +85,8 @@ export default function UKMPage() {
               aria-label={`Filter kategori ${cat}`}
               className={`px-4 py-2 rounded-full text-sm font-body font-semibold transition-all duration-150 ${
                 activeFilter === cat
-                  ? "bg-shelly text-white"
-                  : "bg-white border border-peach text-shelly/70 hover:border-coral hover:text-shelly"
+                  ? "bg-[#38BDF8] text-[#060B18] shadow-[0_0_12px_rgba(56,189,248,0.4)]"
+                  : "bg-white/5 border border-[#38BDF8]/15 text-[#94A3B8] hover:border-[#38BDF8]/40 hover:text-[#38BDF8]"
               }`}
             >
               {cat}
@@ -95,7 +95,7 @@ export default function UKMPage() {
         </div>
 
         {/* Count */}
-        <p className="text-sm text-shelly/50 font-body mb-5" aria-live="polite">
+        <p className="text-sm text-[#94A3B8] font-body mb-5" aria-live="polite">
           {filtered.length} UKM ditemukan
         </p>
 
@@ -110,25 +110,25 @@ export default function UKMPage() {
             <Link
               key={ukm.id}
               href={`/ukm/${ukm.slug}`}
-              className="card-gelex p-4 flex flex-col gap-3"
+              className="card-gelex p-4 flex flex-col gap-3 hover:border-[#38BDF8]/30 transition-all"
               aria-label={`Kartu UKM: ${ukm.name}, kategori ${ukm.category}. ${ukm.description ?? ""}. Tekan Enter untuk lihat profil lengkap.`}
               data-narration={`Kartu UKM: ${ukm.name}, kategori ${ukm.category}. ${ukm.description ?? ""}. Tekan Enter untuk profil lengkap.`}
             >
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl flex-shrink-0 bg-[#FFF8F0] border border-peach flex items-center justify-center text-center px-1">
-                  <span className="text-[9px] font-body font-semibold leading-tight text-shelly">
+                <div className="w-12 h-12 rounded-xl flex-shrink-0 bg-[#38BDF8]/5 border border-[#38BDF8]/15 flex items-center justify-center text-center px-1">
+                  <span className="text-[9px] font-body font-semibold leading-tight text-[#38BDF8]">
                     Isi gambar
                   </span>
                 </div>
                 <div>
-                  <div className="font-body font-bold text-sm text-shelly-dark leading-tight">{ukm.name}</div>
-                  <span className="text-xs bg-peach/60 text-shelly px-2 py-0.5 rounded-full mt-1 inline-block">{ukm.category}</span>
+                  <div className="font-body font-bold text-sm text-[#E2E8F0] leading-tight">{ukm.name}</div>
+                  <span className="text-xs bg-[#38BDF8]/10 text-[#38BDF8] px-2 py-0.5 rounded-full mt-1 inline-block">{ukm.category}</span>
                 </div>
               </div>
-              <p className="text-xs text-shelly/60 font-body leading-relaxed line-clamp-2">{ukm.description}</p>
-              <div className="flex items-center justify-between mt-auto pt-2 border-t border-peach/30">
-                <span className="text-xs text-shelly/40 font-body">Lihat Profil</span>
-                <span className="w-7 h-7 rounded-full bg-coral/10 text-coral flex items-center justify-center text-sm" aria-hidden="true">→</span>
+              <p className="text-xs text-[#94A3B8] font-body leading-relaxed line-clamp-2">{ukm.description}</p>
+              <div className="flex items-center justify-between mt-auto pt-2 border-t border-[#38BDF8]/10">
+                <span className="text-xs text-[#94A3B8] font-body">Lihat Profil</span>
+                <span className="w-7 h-7 rounded-full bg-[#38BDF8]/10 text-[#38BDF8] flex items-center justify-center text-sm" aria-hidden="true">→</span>
               </div>
             </Link>
           ))}
@@ -136,12 +136,12 @@ export default function UKMPage() {
 
         {filtered.length === 0 && (
           <div className="text-center py-16">
-            <p className="font-body text-shelly/50">UKM tidak ditemukan. Coba kata kunci lain.</p>
+            <p className="font-body text-[#94A3B8]">UKM tidak ditemukan. Coba kata kunci lain.</p>
           </div>
         )}
       </div>
 
-      <Shelly
+      <Glexy
         mood={activeFilter === "Semua" ? "waving" : "happy"}
         message={categoryMessages[activeFilter]}
         position="bottom-right"

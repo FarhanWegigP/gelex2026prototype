@@ -9,7 +9,7 @@ interface SectionNarratorProps {
 
 export default function SectionNarrator({
   text,
-  label = "Dengarkan Shelly",
+  label = "Dengarkan Glexy",
 }: SectionNarratorProps) {
   const { speak, stop, isSpeaking, isPaused, resume, isSupported } = useSpeech();
 
@@ -30,7 +30,7 @@ export default function SectionNarrator({
       aria-label={label}
       title={label}
     >
-      <span className="text-sm">🐢</span>
+      <span className="text-sm">⭐</span>
       <span className="text-xs">
         {isSpeaking && !isPaused ? "⏸ Pause" : isPaused ? "▶ Lanjut" : label}
       </span>
@@ -39,7 +39,7 @@ export default function SectionNarrator({
           {[0, 150, 300].map((d) => (
             <span
               key={d}
-              className="w-0.5 h-3 bg-[#E8896A]/50 rounded animate-bounce"
+              className="w-0.5 h-3 bg-[#38BDF8]/60 rounded animate-bounce"
               style={{ animationDelay: `${d}ms` }}
             />
           ))}

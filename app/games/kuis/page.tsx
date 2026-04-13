@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-import Shelly, { ShellyMood } from "@/components/Shelly";
+import Glexy, { GlexyMood } from "@/components/Glexy";
 import { useAccessibility } from "@/hooks/useAccessibility";
 import { quizQuestions } from "@/data";
 
@@ -18,7 +18,7 @@ export default function KuisPage() {
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [timer, setTimer] = useState(TIMER_PER_QUESTION);
-  const [shellyMood, setShellyMood] = useState<ShellyMood>("excited");
+  const [shellyMood, setShellyMood] = useState<GlexyMood>("excited");
   const [shellyMsg, setShellyMsg] = useState("Ayo mulai kuis! Siap menguji pengetahuanmu?");
   const [leaderboard, setLeaderboard] = useState<{ name: string; score: number }[]>([]);
   const [playerName, setPlayerName] = useState("");
@@ -72,7 +72,7 @@ export default function KuisPage() {
       if (correct) {
         setScore((s) => s + 1);
         setShellyMood("cheering");
-        setShellyMsg(question.shellyReaction);
+        setShellyMsg(question.glexyReaction);
         speak(`Benar! ${question.shellyReaction}`);
       } else {
         setShellyMood("sad");
@@ -135,35 +135,35 @@ export default function KuisPage() {
 
   const finalMsg =
     score >= 8
-      ? `${score}/10! Kamu jenius UKM UGM! Shelly bangga!`
+      ? `${score}/10! Kamu jenius UKM UGM! Glexy bangga! ⭐`
       : score >= 5
-      ? `${score}/10 — Lumayan! Rajin-rajin kunjungi booth UKM ya!`
-      : `${score}/10 — Yuk pelajari lebih lanjut tentang UKM UGM! Shelly sayang kamu!`;
+      ? `${score}/10 — Lumayan! Rajin-rajin kunjungi booth UKM ya! 🌌`
+      : `${score}/10 — Yuk pelajari lebih lanjut tentang UKM UGM! Glexy sayang kamu! 💙`;
 
-  const finalMood: ShellyMood = score >= 8 ? "cheering" : score >= 5 ? "happy" : "waving";
+  const finalMood: GlexyMood = score >= 8 ? "cheering" : score >= 5 ? "happy" : "waving";
 
   return (
-    <div className="min-h-screen bg-offwhite pb-24">
+    <div className="min-h-screen bg-[#060B18] pb-24">
       {/* Header */}
       <div
-        className="bg-gelex-gradient py-12 px-6"
+        className="bg-gradient-to-br from-[#060B18] via-[#0D1B4B] to-[#120A3B] py-12 px-6 border-b border-[#38BDF8]/10"
         data-section="header"
         data-narration={PAGE_GREETING}
         tabIndex={-1}
       >
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <div>
-            <Link href="/games" className="text-shelly/50 hover:text-shelly text-sm font-body mb-2 inline-block" aria-label="Kembali ke halaman Games">
+            <Link href="/games" className="text-[#94A3B8] hover:text-[#38BDF8] text-sm font-body mb-2 inline-block transition-colors" aria-label="Kembali ke halaman Games">
               ← Kembali ke Games
             </Link>
-            <h1 className="font-heading font-black text-3xl text-shelly-dark">Kuis UKM</h1>
-            <p className="font-body text-shelly/60 mt-1">Uji pengetahuanmu tentang UKM UGM!</p>
+            <h1 className="font-heading font-black text-3xl text-[#E2E8F0]">Kuis UKM</h1>
+            <p className="font-body text-[#94A3B8] mt-1">Uji pengetahuanmu tentang UKM UGM!</p>
           </div>
           {state === "playing" && (
             <div className="text-right" aria-live="polite" aria-label={`Waktu tersisa ${timer} detik, skor ${score}`}>
-              <div className="font-heading font-black text-4xl text-coral">{timer}s</div>
-              <div className="text-xs text-shelly/50 font-body">tersisa</div>
-              <div className="text-sm font-body text-shelly/60 mt-1">
+              <div className="font-heading font-black text-4xl text-[#38BDF8]">{timer}s</div>
+              <div className="text-xs text-[#94A3B8] font-body">tersisa</div>
+              <div className="text-sm font-body text-[#94A3B8] mt-1">
                 Skor: {score} / {isAnswered ? currentIndex + 1 : currentIndex} soal
               </div>
             </div>
@@ -175,8 +175,8 @@ export default function KuisPage() {
         {/* START screen */}
         {state === "start" && (
           <div className="card-gelex p-8 text-center">
-            <h2 className="font-heading font-black text-2xl text-shelly-dark mb-2">Siap Bermain?</h2>
-            <p className="font-body text-shelly/60 mb-6">
+            <h2 className="font-heading font-black text-2xl text-[#E2E8F0] mb-2">Siap Bermain?</h2>
+            <p className="font-body text-[#94A3B8] mb-6">
               10 pertanyaan, 15 detik per soal. Seberapa banyak yang kamu tahu tentang UKM UGM?
             </p>
             <input
@@ -186,7 +186,7 @@ export default function KuisPage() {
               onChange={(e) => setPlayerName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleStart()}
               aria-label="Nama pemain"
-              className="w-full px-4 py-3 rounded-2xl border border-peach font-body text-shelly-dark focus:outline-none focus:border-coral focus:ring-2 focus:ring-coral/20 mb-4 text-center text-lg"
+              className="w-full px-4 py-3 rounded-2xl border border-[#38BDF8]/20 bg-[#0D1B4B]/50 font-body text-[#E2E8F0] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#38BDF8]/50 focus:ring-2 focus:ring-[#38BDF8]/10 mb-4 text-center text-lg backdrop-blur-sm"
             />
             <button
               onClick={handleStart}
@@ -200,14 +200,14 @@ export default function KuisPage() {
             {/* Leaderboard */}
             {leaderboard.length > 0 && (
               <div className="mt-8 text-left">
-                <h3 className="font-heading font-bold text-lg text-shelly-dark mb-3">Leaderboard Sesi Ini</h3>
+                <h3 className="font-heading font-bold text-lg text-[#E2E8F0] mb-3">Leaderboard Sesi Ini</h3>
                 <ol>
                   {leaderboard.slice(0, 5).map((entry, i) => (
-                    <li key={i} className="flex items-center justify-between py-2 border-b border-peach/30 last:border-0">
-                      <span className="font-body text-sm text-shelly/70">
+                    <li key={i} className="flex items-center justify-between py-2 border-b border-[#38BDF8]/10 last:border-0">
+                      <span className="font-body text-sm text-[#94A3B8]">
                         {i + 1}. {entry.name}
                       </span>
-                      <span className="font-heading font-bold text-coral">{entry.score}/10</span>
+                      <span className="font-heading font-bold text-[#38BDF8]">{entry.score}/10</span>
                     </li>
                   ))}
                 </ol>
@@ -221,22 +221,22 @@ export default function KuisPage() {
           <div>
             {/* Progress bar */}
             <div className="mb-6">
-              <div className="flex justify-between text-xs text-shelly/50 font-body mb-2">
+              <div className="flex justify-between text-xs text-[#94A3B8] font-body mb-2">
                 <span>Pertanyaan {currentIndex + 1} dari {quizQuestions.length}</span>
                 <span>{Math.round((currentIndex / quizQuestions.length) * 100)}%</span>
               </div>
-              <div className="h-2 bg-peach rounded-full overflow-hidden" role="progressbar" aria-valuenow={currentIndex} aria-valuemin={0} aria-valuemax={quizQuestions.length}>
+              <div className="h-2 bg-[#38BDF8]/10 rounded-full overflow-hidden" role="progressbar" aria-valuenow={currentIndex} aria-valuemin={0} aria-valuemax={quizQuestions.length}>
                 <div
-                  className="h-full bg-coral rounded-full transition-all duration-500"
+                  className="h-full bg-[#38BDF8] rounded-full transition-all duration-500"
                   style={{ width: `${(currentIndex / quizQuestions.length) * 100}%` }}
                 />
               </div>
             </div>
 
             {/* Timer bar */}
-            <div className="h-1.5 bg-peach rounded-full overflow-hidden mb-6" aria-hidden="true">
+            <div className="h-1.5 bg-[#38BDF8]/10 rounded-full overflow-hidden mb-6" aria-hidden="true">
               <div
-                className={`h-full rounded-full transition-all duration-1000 ${timer <= 5 ? "bg-red-400" : "bg-coral"}`}
+                className={`h-full rounded-full transition-all duration-1000 ${timer <= 5 ? "bg-red-400" : "bg-[#38BDF8]"}`}
                 style={{ width: `${(timer / TIMER_PER_QUESTION) * 100}%` }}
               />
             </div>
@@ -248,7 +248,7 @@ export default function KuisPage() {
               aria-live="polite"
               aria-label={`Pertanyaan ${currentIndex + 1}: ${question.question}`}
             >
-              <p className="font-heading font-bold text-xl text-shelly-dark leading-relaxed">
+              <p className="font-heading font-bold text-xl text-[#E2E8F0] leading-relaxed">
                 {question.question}
               </p>
             </div>
@@ -256,11 +256,11 @@ export default function KuisPage() {
             {/* Options */}
             <div className="grid grid-cols-1 gap-3" role="group" aria-label="Pilihan jawaban. Tekan 1, 2, 3, atau 4 untuk menjawab.">
               {question.options.map((option, idx) => {
-                let style = "bg-white border-peach text-shelly/80 hover:border-coral hover:bg-peach/20";
+                let style = "bg-white/5 border-[#38BDF8]/15 text-[#CBD5E1] hover:border-[#38BDF8]/40 hover:bg-[#38BDF8]/5";
                 if (isAnswered) {
-                  if (idx === question.correctAnswer) style = "bg-green-50 border-green-400 text-green-700";
-                  else if (idx === selected) style = "bg-red-50 border-red-400 text-red-600";
-                  else style = "bg-white border-peach/30 text-shelly/40";
+                  if (idx === question.correctAnswer) style = "bg-[#34D399]/10 border-[#34D399]/50 text-[#34D399]";
+                  else if (idx === selected) style = "bg-red-500/10 border-red-500/50 text-red-400";
+                  else style = "bg-white/3 border-white/5 text-[#94A3B8]/50";
                 }
                 return (
                   <button
@@ -268,9 +268,9 @@ export default function KuisPage() {
                     onClick={() => handleAnswer(idx)}
                     disabled={isAnswered}
                     aria-label={`Pilihan ${idx + 1}: ${option}${isAnswered && idx === question.correctAnswer ? " (jawaban benar)" : ""}${isAnswered && idx === selected && idx !== question.correctAnswer ? " (jawaban kamu, salah)" : ""}`}
-                    className={`w-full px-5 py-4 rounded-2xl border-2 font-body font-semibold text-left transition-all ${style} disabled:cursor-default`}
+                    className={`w-full px-5 py-4 rounded-2xl border-2 font-body font-semibold text-left transition-all ${style} disabled:cursor-default backdrop-blur-sm`}
                   >
-                    <span className="font-heading font-bold text-shelly/40 mr-3" aria-hidden="true">
+                    <span className="font-heading font-bold text-[#38BDF8]/50 mr-3" aria-hidden="true">
                       {idx + 1}.
                     </span>
                     {option}
@@ -284,12 +284,12 @@ export default function KuisPage() {
         {/* RESULT screen */}
         {state === "result" && (
           <div className="card-gelex p-8 text-center" role="status" aria-live="polite">
-            <h2 className="font-heading font-black text-3xl text-shelly-dark">Kuis Selesai!</h2>
-            <p className="font-body text-shelly/60 mt-2 mb-6">{playerName} berhasil menjawab:</p>
-            <div className="font-heading font-black text-6xl text-coral mb-2" aria-label={`Skor ${score} dari 10`}>
-              {score}<span className="text-3xl text-shelly/40">/10</span>
+            <h2 className="font-heading font-black text-3xl text-[#E2E8F0]">Kuis Selesai!</h2>
+            <p className="font-body text-[#94A3B8] mt-2 mb-6">{playerName} berhasil menjawab:</p>
+            <div className="font-heading font-black text-6xl text-[#38BDF8] mb-2" aria-label={`Skor ${score} dari 10`}>
+              {score}<span className="text-3xl text-[#94A3B8]">/10</span>
             </div>
-            <p className="font-body text-shelly/70 mt-3 leading-relaxed">{finalMsg}</p>
+            <p className="font-body text-[#CBD5E1] mt-3 leading-relaxed">{finalMsg}</p>
             <div className="flex gap-3 mt-8">
               <button onClick={handleRestart} className="btn-primary flex-1" aria-label="Main kuis lagi">
                 Main Lagi
@@ -302,7 +302,7 @@ export default function KuisPage() {
         )}
       </div>
 
-      <Shelly
+      <Glexy
         mood={state === "result" ? finalMood : shellyMood}
         message={state === "result" ? finalMsg : shellyMsg}
         position="bottom-right"

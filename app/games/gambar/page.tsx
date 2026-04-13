@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import Shelly from "@/components/Shelly";
+import Glexy from "@/components/Glexy";
 import { useAccessibility } from "@/hooks/useAccessibility";
 
 // ── DRAWING CANVAS ──────────────────────────────────────────
@@ -80,13 +80,13 @@ function DrawingGame() {
 
   return (
     <div className="space-y-4">
-      <div className="font-heading font-black text-2xl text-shelly-dark">Kanvas Gambar</div>
+      <div className="font-heading font-black text-2xl text-[#E2E8F0]">Kanvas Gambar</div>
 
       <canvas
         ref={canvasRef}
         width={600}
         height={350}
-        className="w-full rounded-2xl border-2 border-peach cursor-crosshair touch-none"
+        className="w-full rounded-2xl border-2 border-[#38BDF8]/20 cursor-crosshair bg-[#0D1B4B] touch-none"
         style={{ background: "#FFF8F0" }}
         onMouseDown={startDraw}
         onMouseMove={draw}
@@ -115,7 +115,7 @@ function DrawingGame() {
         </div>
 
         <div className="flex items-center gap-2 ml-auto">
-          <label htmlFor="brush-size" className="text-xs text-shelly/50 font-body">Ukuran kuas:</label>
+          <label htmlFor="brush-size" className="text-xs text-[#94A3B8] font-body">Ukuran kuas:</label>
           <input
             id="brush-size"
             type="range"
@@ -133,13 +133,13 @@ function DrawingGame() {
         <button
           onClick={() => setIsEraser(!isEraser)}
           aria-pressed={isEraser}
-          className={`flex-1 py-2 rounded-xl text-sm font-body font-semibold border-2 transition-all ${isEraser ? "bg-peach border-coral text-shelly" : "bg-white border-peach text-shelly/70"}`}
+          className={`flex-1 py-2 rounded-xl text-sm font-body font-semibold border-2 transition-all ${isEraser ? "bg-[#38BDF8]/10 border-[#38BDF8] text-[#38BDF8]" : "bg-white border-[#38BDF8]/15 text-[#38BDF8]/70"}`}
         >
           {isEraser ? "Eraser Aktif" : "Eraser"}
         </button>
         <button
           onClick={clearCanvas}
-          className="flex-1 py-2 rounded-xl text-sm font-body font-semibold bg-white border-2 border-peach text-shelly/70 hover:border-coral"
+          className="flex-1 py-2 rounded-xl text-sm font-body font-semibold bg-white/5 border-2 border-[#38BDF8]/15 text-[#38BDF8]/70 hover:border-coral"
           aria-label="Hapus semua gambar di kanvas"
         >
           Hapus Semua
@@ -153,7 +153,7 @@ function DrawingGame() {
         </button>
       </div>
 
-      <Shelly mood="happy" message="Wah kamu berbakat! Gambar Shelly juga dong!" position="inline" size="sm" />
+      <Glexy mood="happy" message="Wah kamu berbakat! Gambar Glexy juga dong!" position="inline" size="sm" />
     </div>
   );
 }
@@ -215,8 +215,8 @@ function GarageBandGame() {
 
   return (
     <div className="space-y-5">
-      <div className="font-heading font-black text-2xl text-shelly-dark">Garage Band Lite</div>
-      <p className="text-sm font-body text-shelly/60">Tekan tombol-tombol nada untuk bermain musik!</p>
+      <div className="font-heading font-black text-2xl text-[#E2E8F0]">Garage Band Lite</div>
+      <p className="text-sm font-body text-[#94A3B8]">Tekan tombol-tombol nada untuk bermain musik!</p>
 
       {/* Piano keys */}
       <div className="grid grid-cols-4 gap-2 sm:grid-cols-8" role="group" aria-label="Tombol nada musik">
@@ -229,7 +229,7 @@ function GarageBandGame() {
             className={`py-8 rounded-2xl font-heading font-black text-sm border-2 border-shelly/10 transition-all active:scale-95 select-none ${active === idx ? "scale-95 shadow-none brightness-90" : "shadow-warm hover:scale-105"}`}
             style={{ background: note.color }}
           >
-            <div className="text-shelly-dark">{note.label}</div>
+            <div className="text-[#E2E8F0]">{note.label}</div>
           </button>
         ))}
       </div>
@@ -240,7 +240,7 @@ function GarageBandGame() {
           onClick={() => { setRecording(!recording); if (!recording) setSequence([]); }}
           aria-pressed={recording}
           aria-label={recording ? "Stop rekam melodi" : "Mulai rekam melodi"}
-          className={`flex-1 py-3 rounded-2xl font-heading font-bold text-sm transition-all ${recording ? "bg-red-400 text-white animate-pulse" : "bg-white border-2 border-peach text-shelly/70"}`}
+          className={`flex-1 py-3 rounded-2xl font-heading font-bold text-sm transition-all ${recording ? "bg-red-400 text-white animate-pulse" : "bg-white/5 border-2 border-[#38BDF8]/15 text-[#38BDF8]/70"}`}
         >
           {recording ? "Stop Rekam" : "Rekam Melodi"}
         </button>
@@ -255,7 +255,7 @@ function GarageBandGame() {
         <button
           onClick={() => setSequence([])}
           aria-label="Hapus rekaman"
-          className="px-4 py-3 rounded-2xl font-body text-sm bg-white border border-peach text-shelly/60 hover:border-coral"
+          className="px-4 py-3 rounded-2xl font-body text-sm bg-white/5 border border-[#38BDF8]/15 text-[#94A3B8] hover:border-coral"
         >
           Hapus
         </button>
@@ -264,12 +264,12 @@ function GarageBandGame() {
       {sequence.length > 0 && (
         <div className="flex flex-wrap gap-1" aria-label={`Melodi terekam: ${sequence.map((i) => NOTES[i].label).join(", ")}`}>
           {sequence.map((idx, i) => (
-            <span key={i} className="text-xs bg-peach/50 text-shelly px-2 py-0.5 rounded-full font-body">{NOTES[idx].label}</span>
+            <span key={i} className="text-xs bg-[#38BDF8]/10 text-[#38BDF8] px-2 py-0.5 rounded-full font-body">{NOTES[idx].label}</span>
           ))}
         </div>
       )}
 
-      <Shelly mood="excited" message="Musiknya keren! Shelly mau joget!" position="inline" size="sm" />
+      <Glexy mood="excited" message="Musiknya keren! Glexy mau joget!" position="inline" size="sm" />
     </div>
   );
 }
@@ -288,19 +288,19 @@ export default function GambarPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-offwhite pb-24">
+    <div className="min-h-screen bg-[#060B18] pb-24">
       <div
-        className="bg-gelex-gradient py-12 px-6"
+        className="bg-gradient-to-br from-[#060B18] via-[#0D1B4B] to-[#120A3B] py-12 px-6 border-b border-[#38BDF8]/10"
         data-section="header"
         data-narration={PAGE_GREETING}
         tabIndex={-1}
       >
         <div className="max-w-3xl mx-auto">
-          <Link href="/games" className="text-shelly/50 hover:text-shelly text-sm font-body mb-2 inline-block" aria-label="Kembali ke halaman Games">
+          <Link href="/games" className="text-[#94A3B8] hover:text-[#38BDF8] transition-colors text-sm font-body mb-2 inline-block" aria-label="Kembali ke halaman Games">
             ← Kembali ke Games
           </Link>
-          <h1 className="font-heading font-black text-3xl text-shelly-dark">Game Seni</h1>
-          <p className="font-body text-shelly/60 mt-1">Ekspresikan kreativitasmu!</p>
+          <h1 className="font-heading font-black text-3xl text-[#E2E8F0]">Game Seni</h1>
+          <p className="font-body text-[#94A3B8] mt-1">Ekspresikan kreativitasmu!</p>
         </div>
       </div>
 
@@ -310,7 +310,7 @@ export default function GambarPage() {
             role="tab"
             aria-selected={activeGame === "gambar"}
             onClick={() => setActiveGame("gambar")}
-            className={`flex-1 py-3 rounded-2xl font-heading font-bold transition-all duration-150 ${activeGame === "gambar" ? "bg-shelly text-white" : "bg-white border border-peach text-shelly/70"}`}
+            className={`flex-1 py-3 rounded-2xl font-heading font-bold transition-all duration-150 ${activeGame === "gambar" ? "bg-[#38BDF8] text-[#060B18]" : "bg-white border border-[#38BDF8]/15 text-[#38BDF8]/70"}`}
           >
             Kanvas
           </button>
@@ -318,7 +318,7 @@ export default function GambarPage() {
             role="tab"
             aria-selected={activeGame === "musik"}
             onClick={() => setActiveGame("musik")}
-            className={`flex-1 py-3 rounded-2xl font-heading font-bold transition-all duration-150 ${activeGame === "musik" ? "bg-shelly text-white" : "bg-white border border-peach text-shelly/70"}`}
+            className={`flex-1 py-3 rounded-2xl font-heading font-bold transition-all duration-150 ${activeGame === "musik" ? "bg-[#38BDF8] text-[#060B18]" : "bg-white border border-[#38BDF8]/15 text-[#38BDF8]/70"}`}
           >
             Musik
           </button>

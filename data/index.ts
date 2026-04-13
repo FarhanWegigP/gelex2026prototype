@@ -8,7 +8,9 @@ export interface UKM {
   category: UKMCategory;
   description: string;
   logo: string;
-  shellyMessage: string;
+  glexyMessage: string;
+  /** @deprecated use glexyMessage */
+  shellyMessage?: string;
 }
 
 export const ukmList: UKM[] = [
@@ -16,85 +18,85 @@ export const ukmList: UKM[] = [
     id: "1", slug: "bem-km",
     name: "BEM KM UGM", category: "Khusus",
     description: "Badan Eksekutif Mahasiswa Keluarga Mahasiswa UGM — lembaga eksekutif tertinggi mahasiswa UGM yang berperan dalam advokasi, pengabdian, dan pengembangan mahasiswa.",
-    logo: "https://placehold.co/80x80/FADADD/E8896A?text=BEM",
-    shellyMessage: "BEM KM adalah rumahnya para pejuang mahasiswa UGM! 🦋",
+    logo: "https://placehold.co/80x80/0D1B4B/38BDF8?text=BEM",
+    glexyMessage: "BEM KM adalah rumahnya para pejuang mahasiswa UGM! 🦋",
   },
   {
     id: "2", slug: "resimen-mahasiswa",
     name: "Satuan Resimen Mahasiswa", category: "Khusus",
     description: "Unit kegiatan bela negara dan kedisiplinan mahasiswa UGM.",
-    logo: "https://placehold.co/80x80/FADADD/E8896A?text=MENWA",
-    shellyMessage: "Resimen Mahasiswa — berani, disiplin, dan gagah! 💪",
+    logo: "https://placehold.co/80x80/0D1B4B/38BDF8?text=MENWA",
+    glexyMessage: "Resimen Mahasiswa — berani, disiplin, dan gagah! 💪",
   },
   {
     id: "3", slug: "gmds",
     name: "Gadjah Mada Debating Society", category: "Khusus",
     description: "Komunitas debat bahasa Inggris terkemuka di UGM yang telah berprestasi di tingkat nasional dan internasional.",
-    logo: "https://placehold.co/80x80/FADADD/E8896A?text=GMDS",
-    shellyMessage: "GMDS — jagoan debat dari UGM! 🗣️",
+    logo: "https://placehold.co/80x80/0D1B4B/38BDF8?text=GMDS",
+    glexyMessage: "GMDS — jagoan debat dari UGM! 🗣️",
   },
   {
     id: "4", slug: "psm-ugm",
     name: "Paduan Suara Mahasiswa UGM", category: "Seni",
     description: "Unit paduan suara mahasiswa UGM yang telah mengharumkan nama UGM di berbagai kompetisi paduan suara nasional dan internasional.",
-    logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=PSM",
-    shellyMessage: "PSM UGM — suaranya bikin merinding dan terharu! 🎶",
+    logo: "https://placehold.co/80x80/120A3B/818CF8?text=PSM",
+    glexyMessage: "PSM UGM — suaranya bikin merinding dan terharu! 🎶",
   },
   {
     id: "5", slug: "unit-penalaran",
     name: 'Unit Penalaran Ilmiah "Interdiscipline"', category: "Khusus",
     description: "Wadah pengembangan ilmiah dan penelitian mahasiswa lintas disiplin ilmu di UGM.",
-    logo: "https://placehold.co/80x80/FADADD/E8896A?text=UPII",
-    shellyMessage: "UPII — otak-otak cerdas UGM berkumpul di sini! 🧠",
+    logo: "https://placehold.co/80x80/0D1B4B/38BDF8?text=UPII",
+    glexyMessage: "UPII — otak-otak cerdas UGM berkumpul di sini! 🧠",
   },
   {
     id: "6", slug: "mapagama",
     name: "MAPAGAMA", category: "Khusus",
     description: "Mahasiswa Pecinta Alam Gadjah Mada — unit petualangan alam bebas UGM.",
-    logo: "https://placehold.co/80x80/FADADD/E8896A?text=MAPA",
-    shellyMessage: "MAPAGAMA suka naik gunung! Shelly lebih suka pantai sih 🐢",
+    logo: "https://placehold.co/80x80/0D1B4B/38BDF8?text=MAPA",
+    glexyMessage: "MAPAGAMA suka naik gunung! Glexy lebih suka bintang sih ⭐",
   },
   {
     id: "7", slug: "hmp-ugm",
     name: "Himpunan Mahasiswa Pascasarjana UGM", category: "Khusus",
     description: "Organisasi mahasiswa pascasarjana UGM yang mewadahi kegiatan dan aspirasi mahasiswa S2 dan S3.",
-    logo: "https://placehold.co/80x80/FADADD/E8896A?text=HMP",
-    shellyMessage: "HMP — para kakak-kakak yang sudah sangat pintar! 🎓",
+    logo: "https://placehold.co/80x80/0D1B4B/38BDF8?text=HMP",
+    glexyMessage: "HMP — para kakak-kakak yang sudah sangat pintar! 🎓",
   },
   {
     id: "8", slug: "gama-cendekia",
     name: "Gama Cendekia", category: "Khusus",
     description: "Unit kegiatan pengembangan intelektual dan keilmuan mahasiswa UGM.",
-    logo: "https://placehold.co/80x80/FADADD/E8896A?text=GC",
-    shellyMessage: "Gama Cendekia — tempat tumbuhnya cendekiawan muda! ✨",
+    logo: "https://placehold.co/80x80/0D1B4B/38BDF8?text=GC",
+    glexyMessage: "Gama Cendekia — tempat tumbuhnya cendekiawan muda! ✨",
   },
   {
     id: "9", slug: "skm-bulaksumur",
     name: "SKM Bulaksumur", category: "Khusus",
     description: "Surat Kabar Mahasiswa Bulaksumur — media pers mahasiswa UGM yang kritis dan independen.",
-    logo: "https://placehold.co/80x80/FADADD/E8896A?text=SKM",
-    shellyMessage: "SKM Bulaksumur — penjaga kebebasan pers mahasiswa! 📰",
+    logo: "https://placehold.co/80x80/0D1B4B/38BDF8?text=SKM",
+    glexyMessage: "SKM Bulaksumur — penjaga kebebasan pers mahasiswa! 📰",
   },
   {
     id: "10", slug: "bppm-balairung",
     name: "BPPM Balairung", category: "Khusus",
     description: "Badan Penerbitan dan Pers Mahasiswa Balairung UGM — penerbitan majalah mahasiswa tertua di UGM.",
-    logo: "https://placehold.co/80x80/FADADD/E8896A?text=BPPM",
-    shellyMessage: "BPPM Balairung — majalahnya mahasiswa UGM sejak lama! 📖",
+    logo: "https://placehold.co/80x80/0D1B4B/38BDF8?text=BPPM",
+    glexyMessage: "BPPM Balairung — majalahnya mahasiswa UGM sejak lama! 📖",
   },
   {
     id: "11", slug: "pramuka-ugm",
     name: "Pramuka UGM", category: "Khusus",
     description: "Gerakan Pramuka gugus depan UGM — membangun karakter dan jiwa kepemimpinan mahasiswa.",
-    logo: "https://placehold.co/80x80/FADADD/E8896A?text=PRAMUKA",
-    shellyMessage: "Pramuka UGM — siap dan siaga selalu! 🌿",
+    logo: "https://placehold.co/80x80/0D1B4B/38BDF8?text=PRAMUKA",
+    glexyMessage: "Pramuka UGM — siap dan siaga selalu! 🌿",
   },
   {
     id: "12", slug: "kopma-ugm",
     name: "Koperasi Mahasiswa UGM", category: "Khusus",
     description: "KOPMA UGM — koperasi mahasiswa yang mendukung perekonomian dan kesejahteraan mahasiswa UGM.",
-    logo: "https://placehold.co/80x80/FADADD/E8896A?text=KOPMA",
-    shellyMessage: "KOPMA UGM — belanja hemat sambil berkontribusi! 🛍️",
+    logo: "https://placehold.co/80x80/0D1B4B/38BDF8?text=KOPMA",
+    glexyMessage: "KOPMA UGM — belanja hemat sambil berkontribusi! 🛍️",
   },
 ];
 
@@ -105,22 +107,24 @@ export interface Komunitas {
   name: string;
   description: string;
   logo: string;
-  shellyMessage: string;
+  glexyMessage: string;
+  /** @deprecated use glexyMessage */
+  shellyMessage?: string;
 }
 
 export const komunitasList: Komunitas[] = [
-  { id: "1", slug: "ugm-mun", name: "UGM MUN Community", description: "Model United Nations UGM — simulasi sidang PBB untuk mahasiswa.", logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=MUN", shellyMessage: "MUN — pura-puranya jadi diplomat dunia! 🌍" },
-  { id: "2", slug: "kmid", name: "KMID", description: "Komunitas Mahasiswa Indonesia Damai — membangun harmoni dan toleransi.", logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=KMID", shellyMessage: "KMID — damai itu indah, setuju Shelly! ☮️" },
-  { id: "3", slug: "arjuna-ev", name: "Arjuna EV UGM", description: "Komunitas kendaraan listrik mahasiswa UGM.", logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=EV", shellyMessage: "Arjuna EV — mobil listrik buatan mahasiswa, keren! ⚡" },
-  { id: "4", slug: "bimasakti", name: "Bimasakti Racing Team", description: "Tim balap mahasiswa UGM yang berlaga di kompetisi Formula SAE.", logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=BIMA", shellyMessage: "Bimasakti — ngebut tapi aman ya! 🏎️" },
-  { id: "5", slug: "gmbb", name: "Gadjah Mada Building and Bridge", description: "Komunitas teknik sipil yang merancang jembatan dan bangunan.", logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=GMBB", shellyMessage: "GMBB — yang bangun jembatannya hebat sekali! 🌉" },
-  { id: "6", slug: "gamantaray", name: "Gamantaray", description: "Gadjah Mada Marine and Fisheries Community — pecinta laut UGM.", logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=GAMA", shellyMessage: "Gamantaray suka laut kayak Shelly! 🐠" },
-  { id: "7", slug: "semar-ugm", name: "Semar UGM", description: "Komunitas pengembangan energi terbarukan mahasiswa UGM.", logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=SEMAR", shellyMessage: "Semar UGM — masa depan energi bersih ada di sini! 🌱" },
-  { id: "8", slug: "komastagama", name: "KOMASTAGAMA", description: "Komunitas Mahasiswa Statistika Gadjah Mada.", logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=KOMAS", shellyMessage: "KOMASTAGAMA — data is beautiful! 📊" },
-  { id: "9", slug: "raja-garuda", name: "Raja Garuda UGM", description: "Tim kedirgantaraan mahasiswa UGM.", logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=RGU", shellyMessage: "Raja Garuda — terbang tinggi menggapai langit! 🦅" },
-  { id: "10", slug: "komatik", name: "KOMATIK UGM", description: "Komunitas Matematika dan Informatika UGM.", logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=KOMATIK", shellyMessage: "KOMATIK — coding dan matematika is fun! 💻" },
-  { id: "11", slug: "tim-yacaranda", name: "Tim Yacaranda UGM", description: "Komunitas mahasiswa lintas bidang untuk inovasi sosial.", logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=TYU", shellyMessage: "Tim Yacaranda — inovasi untuk Indonesia! 💡" },
-  { id: "12", slug: "gmlc", name: "Gadjah Mada Leadership Community", description: "Komunitas pengembangan kepemimpinan mahasiswa UGM.", logo: "https://placehold.co/80x80/FDEEC9/E8896A?text=GMLC", shellyMessage: "GMLC — pemimpin masa depan Indonesia! 🌟" },
+  { id: "1", slug: "ugm-mun", name: "UGM MUN Community", description: "Model United Nations UGM — simulasi sidang PBB untuk mahasiswa.", logo: "https://placehold.co/80x80/120A3B/818CF8?text=MUN", glexyMessage: "MUN — pura-puranya jadi diplomat dunia! 🌍" },
+  { id: "2", slug: "kmid", name: "KMID", description: "Komunitas Mahasiswa Indonesia Damai — membangun harmoni dan toleransi.", logo: "https://placehold.co/80x80/120A3B/818CF8?text=KMID", glexyMessage: "KMID — damai itu indah, setuju Glexy! ☮️" },
+  { id: "3", slug: "arjuna-ev", name: "Arjuna EV UGM", description: "Komunitas kendaraan listrik mahasiswa UGM.", logo: "https://placehold.co/80x80/120A3B/818CF8?text=EV", glexyMessage: "Arjuna EV — mobil listrik buatan mahasiswa, keren! ⚡" },
+  { id: "4", slug: "bimasakti", name: "Bimasakti Racing Team", description: "Tim balap mahasiswa UGM yang berlaga di kompetisi Formula SAE.", logo: "https://placehold.co/80x80/120A3B/818CF8?text=BIMA", glexyMessage: "Bimasakti — ngebut tapi aman ya! 🏎️" },
+  { id: "5", slug: "gmbb", name: "Gadjah Mada Building and Bridge", description: "Komunitas teknik sipil yang merancang jembatan dan bangunan.", logo: "https://placehold.co/80x80/120A3B/818CF8?text=GMBB", glexyMessage: "GMBB — yang bangun jembatannya hebat sekali! 🌉" },
+  { id: "6", slug: "gamantaray", name: "Gamantaray", description: "Gadjah Mada Marine and Fisheries Community — pecinta laut UGM.", logo: "https://placehold.co/80x80/120A3B/818CF8?text=GAMA", glexyMessage: "Gamantaray — lautan dan bintang sama indahnya! 🐠⭐" },
+  { id: "7", slug: "semar-ugm", name: "Semar UGM", description: "Komunitas pengembangan energi terbarukan mahasiswa UGM.", logo: "https://placehold.co/80x80/120A3B/818CF8?text=SEMAR", glexyMessage: "Semar UGM — masa depan energi bersih ada di sini! 🌱" },
+  { id: "8", slug: "komastagama", name: "KOMASTAGAMA", description: "Komunitas Mahasiswa Statistika Gadjah Mada.", logo: "https://placehold.co/80x80/120A3B/818CF8?text=KOMAS", glexyMessage: "KOMASTAGAMA — data is beautiful! 📊" },
+  { id: "9", slug: "raja-garuda", name: "Raja Garuda UGM", description: "Tim kedirgantaraan mahasiswa UGM.", logo: "https://placehold.co/80x80/120A3B/818CF8?text=RGU", glexyMessage: "Raja Garuda — terbang tinggi menggapai galaksi! 🦅🌌" },
+  { id: "10", slug: "komatik", name: "KOMATIK UGM", description: "Komunitas Matematika dan Informatika UGM.", logo: "https://placehold.co/80x80/120A3B/818CF8?text=KOMATIK", glexyMessage: "KOMATIK — coding dan matematika is fun! 💻" },
+  { id: "11", slug: "tim-yacaranda", name: "Tim Yacaranda UGM", description: "Komunitas mahasiswa lintas bidang untuk inovasi sosial.", logo: "https://placehold.co/80x80/120A3B/818CF8?text=TYU", glexyMessage: "Tim Yacaranda — inovasi untuk Indonesia! 💡" },
+  { id: "12", slug: "gmlc", name: "Gadjah Mada Leadership Community", description: "Komunitas pengembangan kepemimpinan mahasiswa UGM.", logo: "https://placehold.co/80x80/120A3B/818CF8?text=GMLC", glexyMessage: "GMLC — pemimpin masa depan Indonesia! 🌟" },
 ];
 
 // ─── LINIMASA DATA ────────────────────────────────────────────
@@ -156,20 +160,22 @@ export interface QuizQuestion {
   question: string;
   options: string[];
   correctAnswer: number;
-  shellyReaction: string;
+  glexyReaction: string;
+  /** @deprecated use glexyReaction */
+  shellyReaction?: string;
 }
 
 export const quizQuestions: QuizQuestion[] = [
-  { id: "q1", question: "UKM apa yang bergerak di bidang debat bahasa Inggris di UGM?", options: ["PSM UGM", "GMDS", "BEM KM", "MAPAGAMA"], correctAnswer: 1, shellyReaction: "Betul! GMDS jagoannya debat! 🎉" },
-  { id: "q2", question: "Apa kepanjangan dari KOPMA?", options: ["Komunitas Pemuda Mahasiswa", "Koperasi Mahasiswa", "Komite Pengawas Mahasiswa", "Komunitas Peduli Masyarakat"], correctAnswer: 1, shellyReaction: "Benar! Belanja di KOPMA yuk! 🛍️" },
-  { id: "q3", question: "Sekber apa yang menaungi UKM seni di UGM?", options: ["Sekber Olahraga", "Sekber Khusus", "Sekber Seni", "Sekber Rohani"], correctAnswer: 2, shellyReaction: "Tepat sekali! Seni itu indah! 🎨" },
-  { id: "q4", question: "Berapa total UKM yang ada di GELEX 2026?", options: ["40 UKM", "45 UKM", "50 UKM", "55 UKM"], correctAnswer: 3, shellyReaction: "Wah 55 UKM! Banyak banget ya! ✨" },
-  { id: "q5", question: "Di mana lokasi Gelanggang Mahasiswa UGM?", options: ["Blimbingsari, Caturtunggal", "Bulaksumur, Sleman", "Babarsari, Depok", "Condongcatur, Sleman"], correctAnswer: 0, shellyReaction: "Betul! Itu rumah Shelly! 🐢🏠" },
-  { id: "q6", question: "Tanggal berapa GELEX 2026 diselenggarakan?", options: ["1-3 Juli 2026", "1-3 Agustus 2026", "17-19 Agustus 2026", "1-3 September 2026"], correctAnswer: 1, shellyReaction: "Catat tanggalnya ya! 📅" },
-  { id: "q7", question: "Apa tagline GELEX 2026?", options: ["Resonansi Harmoni Gelanggang", "Where Creativity Comes Alive and Talent Shines", "Bersatu dalam Keberagaman", "Gelanggang untuk Semua"], correctAnswer: 1, shellyReaction: "Keren kan tagline-nya! ✨" },
-  { id: "q8", question: "PSM UGM adalah singkatan dari?", options: ["Persatuan Seni Mahasiswa", "Paguyuban Seniman Muda", "Paduan Suara Mahasiswa", "Perkumpulan Seni Musik"], correctAnswer: 2, shellyReaction: "PSM — suaranya merdu sekali! 🎵" },
-  { id: "q9", question: "MAPAGAMA bergerak di bidang apa?", options: ["Teknologi Informasi", "Pecinta Alam", "Seni Budaya", "Kewirausahaan"], correctAnswer: 1, shellyReaction: "Iya! MAPAGAMA suka petualangan alam! 🏔️" },
-  { id: "q10", question: "Maskot GELEX 2026 bernama?", options: ["Ramon", "Gantari", "Shelly", "Gelang"], correctAnswer: 2, shellyReaction: "Itu aku! Halo! 🐢💛" },
+  { id: "q1", question: "UKM apa yang bergerak di bidang debat bahasa Inggris di UGM?", options: ["PSM UGM", "GMDS", "BEM KM", "MAPAGAMA"], correctAnswer: 1, glexyReaction: "Betul! GMDS jagoannya debat! 🎉" },
+  { id: "q2", question: "Apa kepanjangan dari KOPMA?", options: ["Komunitas Pemuda Mahasiswa", "Koperasi Mahasiswa", "Komite Pengawas Mahasiswa", "Komunitas Peduli Masyarakat"], correctAnswer: 1, glexyReaction: "Benar! Belanja di KOPMA yuk! 🛍️" },
+  { id: "q3", question: "Sekber apa yang menaungi UKM seni di UGM?", options: ["Sekber Olahraga", "Sekber Khusus", "Sekber Seni", "Sekber Rohani"], correctAnswer: 2, glexyReaction: "Tepat sekali! Seni itu indah! 🎨" },
+  { id: "q4", question: "Berapa total UKM yang ada di GELEX 2026?", options: ["40 UKM", "45 UKM", "50 UKM", "55 UKM"], correctAnswer: 3, glexyReaction: "Wah 55 UKM! Banyak banget ya! ✨" },
+  { id: "q5", question: "Di mana lokasi Gelanggang Mahasiswa UGM?", options: ["Blimbingsari, Caturtunggal", "Bulaksumur, Sleman", "Babarsari, Depok", "Condongcatur, Sleman"], correctAnswer: 0, glexyReaction: "Betul! Itu rumah Glexy! ⭐🏠" },
+  { id: "q6", question: "Tanggal berapa GELEX 2026 diselenggarakan?", options: ["1-3 Juli 2026", "1-3 Agustus 2026", "17-19 Agustus 2026", "1-3 September 2026"], correctAnswer: 1, glexyReaction: "Catat tanggalnya ya! 📅" },
+  { id: "q7", question: "Apa tagline GELEX 2026?", options: ["Resonansi Harmoni Gelanggang", "Where Creativity Comes Alive and Talent Shines", "Bersatu dalam Keberagaman", "Gelanggang untuk Semua"], correctAnswer: 1, glexyReaction: "Keren kan tagline-nya! ✨" },
+  { id: "q8", question: "PSM UGM adalah singkatan dari?", options: ["Persatuan Seni Mahasiswa", "Paguyuban Seniman Muda", "Paduan Suara Mahasiswa", "Perkumpulan Seni Musik"], correctAnswer: 2, glexyReaction: "PSM — suaranya merdu sekali! 🎵" },
+  { id: "q9", question: "MAPAGAMA bergerak di bidang apa?", options: ["Teknologi Informasi", "Pecinta Alam", "Seni Budaya", "Kewirausahaan"], correctAnswer: 1, glexyReaction: "Iya! MAPAGAMA suka petualangan alam! 🏔️" },
+  { id: "q10", question: "Maskot GELEX 2026 bernama?", options: ["Ramon", "Gantari", "Glexy", "Gelang"], correctAnswer: 2, glexyReaction: "Itu aku! Halo! ⭐🌌" },
 ];
 
 export interface CrosswordClue {
