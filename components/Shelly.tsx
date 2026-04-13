@@ -6,7 +6,7 @@ import { useSpeech } from "@/hooks/useSpeech";
 
 export type ShellyMood = "happy" | "excited" | "thinking" | "waving" | "sad" | "cheering";
 export type ShellyPosition = "bottom-right" | "bottom-left" | "inline";
-export type ShellySize = "sm" | "md" | "lg" | "xl";
+export type ShellySize = "sm" | "md" | "lg" | "xl" | "2xl";
 
 interface ShellyProps {
   mood?: ShellyMood;
@@ -14,10 +14,18 @@ interface ShellyProps {
   position?: ShellyPosition;
   size?: ShellySize;
   autoShow?: boolean;
+  bubble?: boolean;
   onNarrate?: () => void;
 }
 
-const sizeMap: Record<ShellySize, number> = { sm: 64, md: 88, lg: 120, xl: 180 };
+// sm=64 md=88 lg=120 xl=180 2xl=300
+const sizeMap: Record<ShellySize, number> = {
+  sm: 64,
+  md: 88,
+  lg: 120,
+  xl: 180,
+  "2xl": 300,
+};
 
 const moodEmoji: Record<ShellyMood, string> = {
   happy: "😊",
@@ -34,6 +42,7 @@ export default function Shelly({
   position = "inline",
   size = "md",
   autoShow = false,
+  bubble = true,
   onNarrate,
 }: ShellyProps) {
   const [showBubble, setShowBubble] = useState(false);
@@ -41,18 +50,18 @@ export default function Shelly({
   const px = sizeMap[size];
 
   useEffect(() => {
-    if (message && autoShow) {
+    if (message && autoShow && bubble) {
       const t = setTimeout(() => setShowBubble(true), 900);
       return () => clearTimeout(t);
     }
-  }, [message, autoShow]);
+  }, [message, autoShow, bubble]);
 
   const handleClick = () => {
     if (isSpeaking) {
       stop();
     } else if (message) {
       speak(message);
-      setShowBubble(true);
+      if (bubble) setShowBubble(true);
     }
     onNarrate?.();
   };
@@ -67,7 +76,7 @@ export default function Shelly({
   return (
     <div className={posClass}>
       <AnimatePresence>
-        {showBubble && message && (
+        {bubble && showBubble && message && (
           <motion.div
             key="bubble"
             initial={{ opacity: 0, y: 8, scale: 0.9 }}
@@ -105,11 +114,10 @@ export default function Shelly({
           width={px}
           height={px}
           className={`drop-shadow-xl ${isSpeaking ? "animate-pulse" : ""}`}
-          priority={size === "xl" || size === "lg"}
+          priority={size === "2xl" || size === "xl" || size === "lg"}
           style={{ width: px, height: px, objectFit: "contain" }}
         />
 
-        {/* Speaking ring */}
         {isSpeaking && (
           <motion.div
             className="absolute inset-0 rounded-full border-[3px] border-[#E8896A]/60 pointer-events-none"
@@ -119,7 +127,6 @@ export default function Shelly({
         )}
       </motion.button>
 
-      {/* Speaking label – only for fixed positions */}
       {isSpeaking && position !== "inline" && (
         <motion.div
           initial={{ opacity: 0, y: 4 }}

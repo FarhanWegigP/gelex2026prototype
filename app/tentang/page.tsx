@@ -57,12 +57,17 @@ export default function TentangPage() {
           <h2 className="font-heading font-bold text-xl text-shelly-dark mb-4">Galeri GELEX</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {Array.from({ length: 6 }, (_, i) => (
-              <div key={i} className="aspect-video rounded-2xl overflow-hidden bg-peach/40">
-                <img
-                  src={`https://picsum.photos/400/250?random=${i + 10}`}
-                  alt={`Foto kegiatan GELEX, gambar ${i + 1} dari 6`}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
+              <div key={i} className="aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-[#FFF8F0] via-white to-[#FDEEC9] border border-peach/40 p-3">
+                <div className="w-full h-full rounded-xl border border-dashed border-[#E8896A]/35 bg-white/80 flex items-center justify-center text-center px-3">
+                  <div>
+                    <div className="font-heading font-bold text-lg text-[#E8896A] mb-1">
+                      Isi gambar
+                    </div>
+                    <div className="text-xs font-body text-shelly/60">
+                      Slot galeri {i + 1}
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

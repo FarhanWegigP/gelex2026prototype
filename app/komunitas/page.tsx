@@ -77,7 +77,11 @@ export default function KomunitasPage() {
               aria-label={`Komunitas ${kom.name}. ${kom.description}`}
             >
               <div className="flex items-center gap-3">
-                <img src={kom.logo} alt="" aria-hidden="true" className="w-12 h-12 rounded-xl object-cover flex-shrink-0" />
+                <div className="w-12 h-12 rounded-xl flex-shrink-0 bg-[#FFF8F0] border border-peach flex items-center justify-center text-center px-1">
+                  <span className="text-[9px] font-body font-semibold leading-tight text-shelly">
+                    Isi gambar
+                  </span>
+                </div>
                 <div className="font-body font-bold text-sm text-shelly-dark leading-tight">{kom.name}</div>
               </div>
               <p className="text-xs text-shelly/60 font-body leading-relaxed">{kom.description}</p>

@@ -8,6 +8,7 @@ import {
   useEffect,
   ReactNode,
 } from "react";
+import { usePathname } from "next/navigation";
 import { useSpeech } from "./useSpeech";
 
 interface AccessibilityContextType {
@@ -39,16 +40,16 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
   const [ariaLiveText, setAriaLiveText] = useState("");
   const { speak: rawSpeak, stop, isSpeaking, isSupported } = useSpeech();
 
-  // Refs to avoid stale closures
   const isAccessibilityModeRef = useRef(true);
   const currentGreetingRef = useRef<string>("");
   const lastNarrationRef = useRef<string>("");
+  const lastAutoNarrationRef = useRef<string>("");
+  const pathname = usePathname();
 
   useEffect(() => {
     isAccessibilityModeRef.current = isAccessibilityMode;
   }, [isAccessibilityMode]);
 
-  // speak() is gated by accessibility mode
   const speak = useCallback(
     (text: string) => {
       if (!isAccessibilityModeRef.current) return;
@@ -68,7 +69,6 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
     });
   }, [stop]);
 
-  // Call once on mount per page. Returns cleanup (clears the timeout).
   const autoGreetOnMount = useCallback(
     (text: string): (() => void) => {
       currentGreetingRef.current = text;
@@ -76,35 +76,95 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
         if (!isAccessibilityModeRef.current) return;
         rawSpeak(text);
         if (!isSupported) setAriaLiveText(text);
-      }, 1000);
+      }, 800);
       return () => clearTimeout(t);
     },
     [rawSpeak, isSupported]
   );
 
-  // Focus-based narration: when focus enters a new [data-narration] element, Shelly reads it
+  // ── Auto-narasi saat scroll (IntersectionObserver) ──────────
   useEffect(() => {
     if (!isAccessibilityMode) return;
 
+    const spokenIds = new Set<string>();
+    let scrollStopTimer: ReturnType<typeof setTimeout> | null = null;
+    let pendingSectionId = "";
+    let pendingNarration = "";
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        const activeEntry = visibleEntries[0];
+        if (!activeEntry) return;
+
+        const el = activeEntry.target as HTMLElement;
+        const sectionId =
+          el.getAttribute("data-section") ||
+          (el.getAttribute("data-narration") ?? "").slice(0, 40);
+        const text = el.getAttribute("data-narration");
+
+        if (!sectionId || !text || spokenIds.has(sectionId)) return;
+        pendingSectionId = sectionId;
+        pendingNarration = text;
+      },
+      {
+        threshold: [0.3, 0.45, 0.6],
+        rootMargin: "0px 0px -12% 0px",
+      }
+    );
+
+    const sections = document.querySelectorAll("[data-section][data-narration]");
+    sections.forEach((el) => observer.observe(el));
+
+    const speakPendingNarration = () => {
+      if (!pendingSectionId || !pendingNarration || spokenIds.has(pendingSectionId)) {
+        return;
+      }
+      spokenIds.add(pendingSectionId);
+      lastAutoNarrationRef.current = pendingNarration;
+      rawSpeak(pendingNarration);
+      if (!isSupported) setAriaLiveText(pendingNarration);
+    };
+
+    const handleScroll = () => {
+      if (scrollStopTimer) clearTimeout(scrollStopTimer);
+      scrollStopTimer = setTimeout(() => {
+        speakPendingNarration();
+      }, 450);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollStopTimer) clearTimeout(scrollStopTimer);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAccessibilityMode, pathname, rawSpeak, isSupported]);
+
+  // ── Focus-based narration (tetap ada sebagai fallback) ──────
+  useEffect(() => {
+    if (!isAccessibilityMode) return;
     const handleFocusin = (e: FocusEvent) => {
       const target = e.target as HTMLElement;
       const narrationEl = target.closest("[data-narration]") as HTMLElement | null;
       if (!narrationEl) return;
       const text = narrationEl.getAttribute("data-narration") ?? "";
-      if (!text || text === lastNarrationRef.current) return;
+      if (
+        !text ||
+        text === lastNarrationRef.current ||
+        text === lastAutoNarrationRef.current
+      ) return;
       lastNarrationRef.current = text;
       rawSpeak(text);
       if (!isSupported) setAriaLiveText(text);
     };
-
-    // Reset last narration on page change so sections re-read after navigation
-    const resetOnNav = () => { lastNarrationRef.current = ""; };
-    window.addEventListener("popstate", resetOnNav);
     document.addEventListener("focusin", handleFocusin);
-    return () => {
-      document.removeEventListener("focusin", handleFocusin);
-      window.removeEventListener("popstate", resetOnNav);
-    };
+    return () => document.removeEventListener("focusin", handleFocusin);
   }, [isAccessibilityMode, rawSpeak, isSupported]);
 
   return (

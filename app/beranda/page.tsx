@@ -11,7 +11,7 @@ import { ukmList, komunitasList, linimasaEvents } from "@/data";
 
 // ── Narration texts ────────────────────────────────────────────
 const N = {
-  hero: "Kamu sekarang di halaman Beranda GELEX 2026. Acara berlangsung 1 hingga 3 Agustus 2026 di Gelanggang Mahasiswa UGM. Di halaman ini ada: info tentang GELEX, linimasa 3 hari acara, daftar UKM, daftar komunitas, dan promo mini games. Tekan Tab untuk navigasi, Alt N untuk skip ke section berikutnya.",
+  hero: "Kamu sekarang di halaman Beranda GELEX 2026. Acara berlangsung 1 hingga 3 Agustus 2026 di Gelanggang Mahasiswa UGM. Di halaman ini ada info tentang GELEX, linimasa 3 hari acara, daftar UKM, daftar komunitas, dan promo mini games. Saat kamu scroll ke tiap bagian, Shelly akan membacakan panduannya secara otomatis.",
   tentang:
     "Tentang GELEX. Gelanggang Expo adalah festival tahunan terbesar di Universitas Gadjah Mada yang menghadirkan pameran dan penampilan dari lebih dari 55 Unit Kegiatan Mahasiswa dan berbagai komunitas mahasiswa.",
   linimasa:
@@ -137,8 +137,8 @@ export default function BerandaPage() {
               mood="excited"
               message="Selamat datang di GELEX 2026! Aku Shelly, siap menemanimu menjelajahi dunia UKM dan komunitas UGM!"
               position="inline"
-              size="xl"
-              autoShow
+              size="2xl"
+              bubble={false}
             />
           </motion.div>
         </div>
@@ -201,13 +201,18 @@ export default function BerandaPage() {
                     key={i}
                     whileHover={{ scale: 1.04 }}
                     transition={{ duration: 0.18 }}
-                    className="aspect-square rounded-2xl overflow-hidden shadow-card border-2 border-white"
+                    className="aspect-square rounded-2xl overflow-hidden shadow-card border-2 border-white bg-gradient-to-br from-[#FFF8F0] via-white to-[#FDEEC9] p-3"
                   >
-                    <img
-                      src={`https://picsum.photos/300/300?random=${i + 10}`}
-                      alt={`Foto kegiatan GELEX ${i + 1}`}
-                      className="w-full h-full object-cover"
-                    />
+                    <div className="w-full h-full rounded-xl border border-dashed border-[#E8896A]/35 bg-white/80 flex items-center justify-center text-center px-3">
+                      <div>
+                        <div className="font-heading font-bold text-lg text-[#E8896A] mb-1">
+                          Isi gambar
+                        </div>
+                        <div className="text-xs font-body text-[#8B7355]">
+                          Slot foto GELEX {i + 1}
+                        </div>
+                      </div>
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -313,12 +318,11 @@ export default function BerandaPage() {
                     whileHover={{ y: -6, scale: 1.02 }}
                     className="card-gelex p-4 flex items-center gap-3 h-full"
                   >
-                    <img
-                      src={ukm.logo}
-                      alt=""
-                      aria-hidden="true"
-                      className="w-11 h-11 rounded-xl object-cover flex-shrink-0 border border-[#FADADD]"
-                    />
+                    <div className="w-11 h-11 rounded-xl flex-shrink-0 border border-[#FADADD] bg-[#FFF8F0] flex items-center justify-center text-center px-1">
+                      <span className="text-[9px] font-body font-semibold leading-tight text-[#E8896A]">
+                        Isi gambar
+                      </span>
+                    </div>
                     <div>
                       <div className="font-body font-bold text-sm text-[#3d2c1e] leading-tight">{ukm.name}</div>
                       <span className="text-[10px] bg-[#FADADD]/80 text-[#E8896A] px-2 py-0.5 rounded-full mt-1 inline-block font-body">
@@ -390,12 +394,11 @@ export default function BerandaPage() {
                   role="article"
                   aria-label={`Komunitas ${kom.name}. ${kom.description}`}
                 >
-                  <img
-                    src={kom.logo}
-                    alt=""
-                    aria-hidden="true"
-                    className="w-12 h-12 rounded-xl object-cover flex-shrink-0 border border-[#FADADD]"
-                  />
+                  <div className="w-12 h-12 rounded-xl flex-shrink-0 border border-[#FADADD] bg-white flex items-center justify-center text-center px-1">
+                    <span className="text-[9px] font-body font-semibold leading-tight text-[#E8896A]">
+                      Isi gambar
+                    </span>
+                  </div>
                   <div>
                     <div className="font-body font-bold text-sm text-[#3d2c1e] leading-tight">{kom.name}</div>
                     <div className="text-xs text-[#8B7355] font-body mt-0.5 line-clamp-2">{kom.description}</div>
@@ -481,9 +484,9 @@ export default function BerandaPage() {
       {/* ── Fixed Shelly ──────────────────────────────────────── */}
       <Shelly
         mood="waving"
-        message="Hai! Aku Shelly! Tekan Alt N untuk loncat ke section berikutnya, atau Spasi untuk dengar ulang panduan halaman ini."
         position="bottom-right"
         size="md"
+        message="Scroll aja ya, nanti Shelly bantu bacain tiap bagian secara otomatis."
         autoShow
       />
     </div>

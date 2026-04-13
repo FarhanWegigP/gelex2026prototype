@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useAccessibility } from "@/hooks/useAccessibility";
@@ -31,7 +32,15 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
         {/* Logo */}
         <Link href="/beranda" className="flex items-center gap-2 group">
-          <span className="text-2xl group-hover:animate-bob inline-block">🐢</span>
+          <span className="w-9 h-9 rounded-full bg-[#E8896A] flex items-center justify-center overflow-hidden p-1 group-hover:animate-bob inline-flex">
+            <Image
+              src="/logo-icon.svg"
+              alt="Logo GELEX"
+              width={28}
+              height={28}
+              className="w-7 h-7 object-contain"
+            />
+          </span>
           <span className="font-heading font-black text-xl text-shelly-dark tracking-tight">
             GELEX <span className="text-coral">2026</span>
           </span>

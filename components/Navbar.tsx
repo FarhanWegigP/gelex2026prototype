@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -40,8 +41,14 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
         {/* Logo */}
         <Link href="/beranda" className="flex items-center gap-2.5 group" aria-label="GELEX 2026 — kembali ke beranda">
-          <motion.div whileHover={{ rotate: 8 }} className="w-9 h-9 rounded-full bg-[#E8896A] flex items-center justify-center text-lg">
-            🐢
+          <motion.div whileHover={{ rotate: 8 }} className="w-9 h-9 rounded-full bg-[#E8896A] flex items-center justify-center overflow-hidden p-1">
+            <Image
+              src="/logo-icon.svg"
+              alt="Logo GELEX"
+              width={28}
+              height={28}
+              className="w-7 h-7 object-contain"
+            />
           </motion.div>
           <div className="leading-tight">
             <div className="font-heading font-bold text-[#E8896A] text-base">GELEX</div>

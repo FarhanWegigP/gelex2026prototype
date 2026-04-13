@@ -115,7 +115,11 @@ export default function UKMPage() {
               data-narration={`Kartu UKM: ${ukm.name}, kategori ${ukm.category}. ${ukm.description ?? ""}. Tekan Enter untuk profil lengkap.`}
             >
               <div className="flex items-center gap-3">
-                <img src={ukm.logo} alt="" aria-hidden="true" className="w-12 h-12 rounded-xl object-cover flex-shrink-0" />
+                <div className="w-12 h-12 rounded-xl flex-shrink-0 bg-[#FFF8F0] border border-peach flex items-center justify-center text-center px-1">
+                  <span className="text-[9px] font-body font-semibold leading-tight text-shelly">
+                    Isi gambar
+                  </span>
+                </div>
                 <div>
                   <div className="font-body font-bold text-sm text-shelly-dark leading-tight">{ukm.name}</div>
                   <span className="text-xs bg-peach/60 text-shelly px-2 py-0.5 rounded-full mt-1 inline-block">{ukm.category}</span>

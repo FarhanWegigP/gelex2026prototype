@@ -17,7 +17,11 @@ export default function UKMDetailPage({ params }: { params: { slug: string } }) 
         <div className="max-w-3xl mx-auto">
           <Link href="/ukm" className="text-shelly/50 hover:text-shelly text-sm font-body mb-6 inline-block">← Kembali ke UKM</Link>
           <div className="flex items-center gap-5">
-            <img src={ukm.logo} alt={ukm.name} className="w-20 h-20 rounded-2xl shadow-warm" />
+            <div className="w-20 h-20 rounded-2xl shadow-warm bg-[#FFF8F0] border border-peach flex items-center justify-center text-center px-2">
+              <span className="text-xs font-body font-semibold leading-tight text-shelly">
+                Isi gambar
+              </span>
+            </div>
             <div>
               <span className="text-xs bg-peach/60 text-shelly px-2 py-0.5 rounded-full font-body">{ukm.category}</span>
               <h1 className="font-heading font-black text-3xl text-shelly-dark mt-1">{ukm.name}</h1>
